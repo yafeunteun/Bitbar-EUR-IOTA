@@ -16,10 +16,12 @@ iota_logo='iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAAlwS
 
 
 iota_price=$(curl -s "https://api.coinmarketcap.com/v1/ticker/?convert=EUR" | python -c 'import json, sys; print(list(filter(lambda x: x["id"] == "iota", json.load(sys.stdin)))[0]["price_eur"])')
+iota_variation_1d=$(curl -s "https://api.coinmarketcap.com/v1/ticker/?convert=EUR" | python -c 'import json, sys; print(list(filter(lambda x: x["id"] == "iota", json.load(sys.stdin)))[0]["percent_change_24h"])')
+iota_variation_7d=$(curl -s "https://api.coinmarketcap.com/v1/ticker/?convert=EUR" | python -c 'import json, sys; print(list(filter(lambda x: x["id"] == "iota", json.load(sys.stdin)))[0]["percent_change_7d"])')
 
 iota_price=$(python -c "print (round(float($iota_price), 2))")
 
-echo "$iota_price | templateImage=$iota_logo"
+echo "$iota_price € - 1d: $iota_variation_1d% - 7d: $iota_variation_7d% | templateImage=$iota_logo"
 
 
 
